@@ -97,6 +97,8 @@ def fairseq_train(
             'translation',
             preprocessed_dir,
             # '--raw-text', # Not present in new fairseq
+            '--dataset-impl', # Replaces --raw-text
+            'raw', # Replaces --raw-text
             '--source-lang',
             'complex',
             '--target-lang',
@@ -214,6 +216,8 @@ def _fairseq_generate(complex_filepath,
         '--batch-size',
         batch_size,
         # '--raw-text', # Not present in new fairseq
+        '--dataset-impl', # Replaces --raw-text
+        'raw', # Replaces --raw-text
         '--print-alignment',
         '--gen-subset',
         'tmp',
