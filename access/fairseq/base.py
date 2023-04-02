@@ -96,7 +96,7 @@ def fairseq_train(
             '--task',
             'translation',
             preprocessed_dir,
-            '--raw-text',
+            # '--raw-text', # Not present in new fairseq
             '--source-lang',
             'complex',
             '--target-lang',
@@ -213,7 +213,7 @@ def _fairseq_generate(complex_filepath,
         diverse_beam_strength,
         '--batch-size',
         batch_size,
-        '--raw-text',
+        # '--raw-text', # Not present in new fairseq
         '--print-alignment',
         '--gen-subset',
         'tmp',
