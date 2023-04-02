@@ -6,7 +6,8 @@
 #
 
 from contextlib import contextmanager, AbstractContextManager
-from fcntl import flock, LOCK_EX, LOCK_UN
+# from fcntl import flock, LOCK_EX, LOCK_UN
+from portalocker import lock, LOCK_EX, LOCK_UN
 import inspect
 import io
 from itertools import zip_longest
@@ -96,9 +97,9 @@ def count_lines(filepath):
 @contextmanager
 def open_with_lock(filepath, mode):
     with open(filepath, mode) as f:
-        flock(f, LOCK_EX)
+        lock(f, LOCK_EX)
         yield f
-        flock(f, LOCK_UN)
+        lock(f, LOCK_UN)
 
 
 def get_lockfile_path(path):
