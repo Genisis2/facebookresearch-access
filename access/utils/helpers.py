@@ -15,6 +15,7 @@ from pathlib import Path
 import shutil
 import sys
 import tempfile
+import os
 
 import numpy as np
 
@@ -252,8 +253,11 @@ class create_directory_or_skip(AbstractContextManager):
 
 
 def get_temp_filepath(create=False):
-    temp_filepath = Path(tempfile.mkstemp()[1])
+    temp_fd, temp_fp = tempfile.mkstemp()
+    temp_filepath = Path(temp_fp)
     if not create:
+        # Close the file descriptor before deleting
+        os.close(temp_fd)
         temp_filepath.unlink()
     return temp_filepath
 
