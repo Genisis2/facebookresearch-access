@@ -170,7 +170,7 @@ def log_stdout(filepath, mute_stdout=False):
                 stream.flush()
 
     save_stdout = sys.stdout
-    log_file = open(filepath, 'w')
+    log_file = open(filepath, 'w', encoding='UTF-8')
     if mute_stdout:
         sys.stdout = MultipleStreamsWriter([log_file])  # Write to file only
     else:
