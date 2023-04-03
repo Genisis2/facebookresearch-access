@@ -15,6 +15,6 @@ tqdm>=4.36.1
 # easse@git+git://github.com/feralvam/easse.git@580bba7e1378fc8289c663f864e0487188fe8067
 easse@git+git://github.com/feralvam/easse.git # Just get latest version
 # fairseq@git+https://github.com/louismartin/fairseq.git@controllable-sentence-simplification
-fairseq # Just get latest version
+fairseq==0.12.2 # Just get latest version
 tensorboardX # For fairseq
 portalocker # To replace fcntl in helpers.py
