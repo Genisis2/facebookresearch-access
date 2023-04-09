@@ -131,7 +131,7 @@ class AbstractPreprocessor(ABC):
         if encoder_filepath is None:
             # We will use an empty temporary file which will yield None for each line
             encoder_filepath = get_temp_filepath(create=True)
-        with open(output_filepath, 'w') as f:
+        with open(output_filepath, 'w', encoding='UTF-8') as f:
             for encoder_sentence, input_sentence in yield_lines_in_parallel([encoder_filepath, input_filepath],
                                                                             strict=False):
                 decoded_sentence = self.decode_sentence(input_sentence, encoder_sentence=encoder_sentence)

@@ -24,7 +24,7 @@ import numpy as np
 def open_files(filepaths, mode='r'):
     files = []
     try:
-        files = [Path(filepath).open(mode) for filepath in filepaths]
+        files = [Path(filepath).open(mode, encoding='UTF-8') for filepath in filepaths]
         yield files
     finally:
         [f.close() for f in files]
@@ -67,7 +67,7 @@ def write_lines_in_parallel(filepaths, strict=True):
 def write_lines(lines, filepath):
     filepath = Path(filepath)
     filepath.parent.mkdir(parents=True, exist_ok=True)
-    with filepath.open('w') as f:
+    with filepath.open('w', encoding='UTF-8') as f:
         for line in lines:
             f.write(line + '\n')
 
@@ -76,7 +76,7 @@ def yield_lines(filepath, n_lines=float('inf'), prop=1):
     if prop < 1:
         assert n_lines == float('inf')
         n_lines = int(prop * count_lines(filepath))
-    with open(filepath, 'r') as f:
+    with open(filepath, 'r', encoding='UTF-8') as f:
         for i, l in enumerate(f):
             if i >= n_lines:
                 break
