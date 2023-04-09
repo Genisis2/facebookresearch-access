@@ -188,7 +188,8 @@ def _fairseq_generate(complex_filepath,
                       diverse_beam_groups=None,
                       diverse_beam_strength=0.5,
                       sampling=False,
-                      batch_size=128):
+                      batch_size=128,
+                      num_workers=1):
     # exp_dir must contain checkpoints/checkpoint_best.pt, and dict.{complex,simple}.txt
     # First copy input complex file to exp_dir and create dummy simple file
     tmp_dir = Path(tempfile.mkdtemp())
@@ -227,6 +228,8 @@ def _fairseq_generate(complex_filepath,
             'encoder_embed_path': None,
             'decoder_embed_path': None
         },
+        '--num-workers', # Added to control multithreading in windows
+        num_workers
     ]
     if sampling:
         args.extend([
@@ -268,7 +271,8 @@ def fairseq_generate(complex_filepath,
                      diverse_beam_groups=None,
                      diverse_beam_strength=0.5,
                      sampling=False,
-                     batch_size=128):
+                     batch_size=128,
+                     num_workers=1):
     exp_dir = Path(exp_dir)
     checkpoint_path = exp_dir / 'checkpoints/checkpoint_best.pt'
     assert checkpoint_path.exists(), f'Generation failed, no checkpoint at {checkpoint_path}'
@@ -284,4 +288,5 @@ def fairseq_generate(complex_filepath,
                       diverse_beam_groups=diverse_beam_groups,
                       diverse_beam_strength=diverse_beam_strength,
                       sampling=sampling,
-                      batch_size=batch_size)
+                      batch_size=batch_size,
+                      num_workers=num_workers)
